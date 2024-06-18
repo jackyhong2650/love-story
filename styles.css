@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Digital-7';
+    src: url('Digital-7.ttf') format('truetype'); /* 修改路径以匹配你的字体文件路径 */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fff7f7;
@@ -8,24 +13,33 @@ body {
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
+    background-image: url('main-bg.jpg'); /* 使用自定义主页面背景图 */
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .container {
     padding: 20px;
     flex-grow: 1;
     transition: margin-left 0.3s ease;
+    background: rgba(255, 255, 255, 0.9); /* 背景更为半透明 */
+    border-radius: 0px;
 }
 
 header, footer {
     text-align: center;
     padding: 20px 0;
-    background-color: #ffc0cb;
     color: white;
-    border-radius: 10px; 
+    background-color: rgba(255, 192, 203, 0.95); /* 半透明的粉色背景，保持原有色块颜色 */
+}
+
+header {
+    border-radius: 10px;
 }
 
 header h1, footer p {
     margin: 0;
+    z-index: 1000; /* 确保文字在最上层 */
 }
 
 h2 {
@@ -43,13 +57,23 @@ h2 {
 .section {
     margin: 20px 0;
     padding: 20px;
-    background-color: #ffe4e1;
+    background-color: rgba(255, 228, 225, 0.9); /* 半透明背景 */
     border-radius: 10px;
+    border: 1px solid #ff69b4;
+    background-size: 200px 200px;
+}
+
+.section h2 {
+    border-bottom: 2px solid #ff69b4;
+    padding-bottom: 10px;
 }
 
 .section video {
     display: block;
     margin: 0 auto;
+    border: 1px solid #ff69b4;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-container {
@@ -62,6 +86,11 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     height: 75vh;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.carousel img:hover {
+    transform: scale(1.05);
 }
 
 .slick-prev, .slick-next {
@@ -79,15 +108,109 @@ h2 {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: transparent;
-    border: none;
+    background-color: rgba(255, 192, 203, 0.9); /* 半透明粉色背景 */
+    border: 1px solid #ff69b4;
+    border-radius: 10px;
+    padding: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.5s ease;
 }
 
-#background-music {
-    width: 200px;
+.background-music-container.hidden {
+    opacity: 0.5;
+}
+
+.vinyl-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.vinyl-record {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, #000 60%, #333 100%);
+    border: 5px solid #333;
+    border-radius: 50%;
+    position: relative;
+    animation: spin 5s linear infinite;
+    animation-play-state: paused;
+}
+
+.album-cover {
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.vinyl-center {
+    width: 30px;
+    height: 30px;
+    background: #ff69b4;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.music-button:hover {
+    color: #ff69b4;
+}
+
+.tonearm {
+    position: absolute;
+    width: 8px;
+    height: 100px;
+    background-color: #333;
+    top: 10px;
+    right: -50px;
+    transform-origin: top left;
+    transform: rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+.tonearm.playing {
+    transform: rotate(30deg);
+}
+
+.volume-slider, .progress-bar {
+    width: 100%;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.music-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .sidebar {
@@ -101,6 +224,10 @@ h2 {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 1000;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-image: url('sidebar-bg.jpg'); /* 使用自定义侧边栏背景图 */
+    background-size: cover;
 }
 
 .sidebar.open {
@@ -134,7 +261,7 @@ h2 {
     text-align: center;
     font-size: 1.2em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    /* 默认阴影效果 */
+    background: rgba(255, 255, 255, 0.9); /* 背景更为半透明 */
 }
 
 /* 使用鲜艳但不晃眼的马卡龙色系并调整字体颜色 */
@@ -181,6 +308,8 @@ h2 {
 /* 悬停效果 */
 .sidebar ul li a:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    background-color: #ffd1dc;
+    color: #ff69b4;
 }
 
 .sidebar-toggle {
@@ -204,28 +333,30 @@ h2 {
     background-color: #d74370;
 }
 
-@media (max-width: 768px) {
-    .container {
-        margin-left: 0;
-    }
-    
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
+/* 新增倒计时样式 */
+.countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: 'Digital-7', sans-serif;
+    color: #e75480; /* 统一颜色 */
+    margin-top: 20px;
+}
 
-    .sidebar ul {
-        display: flex;
-        flex-direction: column;
-    }
+.countdown-item {
+    text-align: center;
+}
 
-    .sidebar ul li {
-        margin: 20px 0;
-    }
+.countdown-number {
+    font-size: 6em; /* 调整字体大小 */
+    font-weight: bold;
+    display: block;
+    color: #e75480; /* 统一颜色 */
+    text-shadow: 0 0 10px rgba(231, 84, 128, 0.8), 0 0 20px rgba(231, 84, 128, 0.6), 0 0 30px rgba(231, 84, 128, 0.4);
+}
 
-    .sidebar-toggle {
-        top: 10px;
-        left: 10px;
-    }
+.countdown-label {
+    font-size: 1.5em; /* 调整字体大小 */
+    color: #e75480; /* 统一颜色 */
 }
